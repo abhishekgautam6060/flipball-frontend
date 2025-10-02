@@ -45,7 +45,7 @@ async function login() {
     // ✅ Save email in localStorage
     localStorage.setItem("email", data.email);
     setTimeout(() => {
-      window.location.href = "profile.html";
+      window.location.href = "game.html";
     }, 1000);
   }
 }
@@ -103,7 +103,7 @@ if (window.location.pathname.includes("game.html")) {
     .then(res => res.json())
     .then(data => {
       if (!data.success) {
-        window.location.href = "login.html";
+        window.location.href = "game.html";
       } else {
         document.getElementById("balance").innerText = data.balance;
         document.getElementById("attempts").innerText = data.attempts;
