@@ -1,3 +1,5 @@
+const API_BASE = "https://flipball-backend-production.up.railway.app/";
+
 // ---------------------
 // Signup
 // ---------------------
@@ -7,7 +9,7 @@ async function signup() {
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
 
-  const res = await fetch("/signup", {
+  const res = await fetch(`${API_BASE}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ firstname, lastname, email, password }),
@@ -30,7 +32,7 @@ async function login() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
 
-  const res = await fetch("/login", {
+  const res = await fetch(`${API_BASE}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -58,7 +60,7 @@ async function loadProfile() {
     return;
   }
 
-  const res = await fetch(`/balance?email=${email}`);
+  const res = await fetch(`${API_BASE}/balance?email=${email}`);
   const data = await res.json();
 
   if (data.success) {
@@ -77,7 +79,7 @@ async function updateBalance(newBalance, newAttempts) {
   const email = localStorage.getItem("email");
   if (!email) return;
 
-  await fetch("/update-balance", {
+  await fetch(`${API_BASE}/update-balance`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, balance: newBalance, attempts: newAttempts }),
