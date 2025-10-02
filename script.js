@@ -1,4 +1,4 @@
-const API_BASE = "https://flipball-backend-production.up.railway.app/";
+const API_BASE = "https://flipball-backend-production.up.railway.app";
 
 // ---------------------
 // Signup
