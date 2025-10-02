@@ -99,16 +99,21 @@ async function loadProfile() {
 
 // Load balance & attempts on game page
 if (window.location.pathname.includes("game.html")) {
-  fetch(`${API_BASE}/balance`)
-    .then(res => res.json())
-    .then(data => {
-      if (!data.success) {
-        window.location.href = "game.html";
-      } else {
-        document.getElementById("balance").innerText = data.balance;
-        document.getElementById("attempts").innerText = data.attempts;
-      }
-    });
+  const email = localStorage.getItem("email");
+  if (!email) {
+    window.location.href = "login.html";
+  } else {
+    fetch(`${API_BASE}/balance?email=${email}`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.success) {
+          window.location.href = "login.html"; // redirect to login if not authenticated
+        } else {
+          document.getElementById("balance").innerText = data.balance;
+          document.getElementById("attempts").innerText = data.attempts;
+        }
+      });
+  }
 }
 
 
